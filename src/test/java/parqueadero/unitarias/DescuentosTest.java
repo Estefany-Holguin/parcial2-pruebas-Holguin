@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import parqueadero.Descuentos;
 
 public class DescuentosTest {
@@ -22,15 +23,34 @@ public class DescuentosTest {
     void calculaDescuentoParaClienteFrecuente() {
         assertEquals(9000, descuentos.calcularDescuento(10000, "Frecuente"));
     }
+
     @Test
     @DisplayName("No aplica descuento para cliente sin convenio ni frecuente")
     void noAplicaDescuentoParaClienteSinConvenioNiFrecuente() {
         assertEquals(10000, descuentos.calcularDescuento(10000, "Ninguno"));
     }
+
+    @Test
+    @DisplayName("Redondea el descuento al entero más cercano")
+    void redondeaElDescuentoAlEnteroMasCercano() {
+        assertEquals(905, descuentos.calcularDescuento(1005, "Frecuente"));
+    }
+
+    @Test
+    @DisplayName("Calcula descuento con valor cero")
+    void calculaDescuentoConValorCero() {
+        assertEquals(0, descuentos.calcularDescuento(0, "Convenio"));
+    }
+
+    @Test
+    @DisplayName("Rechaza un valor negativo")
+    void rechazaUnValorNegativo() {
+        assertThrows(IllegalArgumentException.class, () -> descuentos.calcularDescuento(-100, "Convenio"));
+    }
+
     @Test
     @DisplayName("Rechaza un tipo de cliente no válido")
     void rechazaUnTipoDeClienteNoValido() {
         assertThrows(IllegalArgumentException.class, () -> descuentos.calcularDescuento(10000, "Invalido"));
     }
 }
-
