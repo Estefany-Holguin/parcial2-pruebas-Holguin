@@ -1,8 +1,9 @@
 package parqueadero;
 
 public class Descuentos {
+
     public int calcularDescuento(int valor, String tipoCliente) {
-        if  (tipoCliente.equals("Ninguno")) {
+        if (tipoCliente.equals("Ninguno")) {
             return valor;
         } else if (tipoCliente.equals("Convenio")) {
             return (int) (valor * 0.8);
