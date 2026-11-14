@@ -6,22 +6,22 @@ import java.util.Map;
 
 public class Reportes {
 
+    private static final String TOTAL_RECAUDADO = "total_recaudado";
+
     private final CalculadoraTarifas calculadora = new CalculadoraTarifas();
 
     public Map<String, Integer> resumen(List<Registro> registros) {
-        Map<String, Integer> r = new HashMap<>();
-        r.put("carro", 0);
-        r.put("moto", 0);
-        r.put("total_recaudado", 0);
+        Map<String, Integer> resultado = new HashMap<>();
+        resultado.put("carro", 0);
+        resultado.put("moto", 0);
+        resultado.put(TOTAL_RECAUDADO, 0);
 
-        for (Registro reg : registros) {
-            String tipo = reg.tipo();
-            if (r.containsKey(tipo)) {
-                r.put(tipo, r.get(tipo) + 1);
-                int tarifa = calculadora.calcularTarifa(reg.minutos(), tipo);
-                r.put("total_recaudado", r.get("total_recaudado") + tarifa);
-            }
+        for (Registro registro : registros) {
+            String tipoVehiculo = registro.tipo();
+            resultado.put(tipoVehiculo, resultado.get(tipoVehiculo) + 1);
+            int tarifa = calculadora.calcularTarifa(registro.minutos(), tipoVehiculo);
+            resultado.put(TOTAL_RECAUDADO, resultado.get(TOTAL_RECAUDADO) + tarifa);
         }
-        return r;
+        return resultado;
     }
 }
