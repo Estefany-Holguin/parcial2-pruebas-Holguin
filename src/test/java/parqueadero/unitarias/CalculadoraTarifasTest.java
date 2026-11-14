@@ -30,5 +30,56 @@ class CalculadoraTarifasTest {
     void rechazaUnTipoDeVehiculoDesconocido() {
         assertThrows(IllegalArgumentException.class, () -> calculadora.calcularTarifa(30, "bicicleta"));
     }
+    @Test
+    @DisplayName("Rechaza un número de minutos negativo")
+    void rechazaUnNumeroDeMinutosNegativo() {
+        assertThrows(IllegalArgumentException.class, () -> calculadora.calcularTarifa(-1, "carro"));
+    }
+    @Test
+    @DisplayName("Rechaza un número de minutos mayor a 1440")
+    void rechazaUnNumeroDeMinutosMayorA1440() {
+        assertThrows(IllegalArgumentException.class, () -> calculadora.calcularTarifa(1441, "moto"));
+    }
+    @Test
+    @DisplayName("Rechaza un número de minutos igual a 1440")
+    void rechazaUnNumeroDeMinutosIgualA1440() {
+        assertThrows(IllegalArgumentException.class, () -> calculadora.calcularTarifa(1440, "carro"));
+    }
+    @Test
+    @DisplayName("Un carro con 15 minutos paga cero")
+    void carroCon15MinutosPagaCero() {
+        assertEquals(0, calculadora.calcularTarifa(15, "carro"));
+    }
+    @Test
+    @DisplayName("Una moto con 15 minutos paga cero")
+    void motoCon15MinutosPagaCero() {
+        assertEquals(0, calculadora.calcularTarifa(15, "moto"));
+    }
+    @Test
+    @DisplayName("Un carro con 1440 minutos paga el tope diario")
+    void carroCon1440MinutosPagaElTopeDiario() {
+        assertEquals(25000, calculadora.calcularTarifa(1440, "carro"));
+    }
+    @Test
+    @DisplayName("Una moto con 1440 minutos paga el tope diario")
+    void motoCon1440MinutosPagaElTopeDiario() {
+        assertEquals(12000, calculadora.calcularTarifa(1440, "moto"));
+    }
+    @Test
+    @DisplayName("Un carro con 0 minutos paga cero")
+    void carroCon0MinutosPagaCero() {
+        assertEquals(0, calculadora.calcularTarifa(0, "carro"));
+    }
+    @Test
+    @DisplayName("Una moto con 0 minutos paga cero")
+    void motoCon0MinutosPagaCero() {
+        assertEquals(0, calculadora.calcularTarifa(0, "moto"));
+    }
+    @Test
+    @DisplayName("Un carro con 1 hora paga 2000")
+    void carroCon1HoraPaga2000() {
+        assertEquals(2000, calculadora.calcularTarifa(60, "carro"));
+    }
 }
+
 
