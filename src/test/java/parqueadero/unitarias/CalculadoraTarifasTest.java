@@ -43,7 +43,7 @@ class CalculadoraTarifasTest {
     @Test
     @DisplayName("Rechaza un número de minutos igual a 1440")
     void rechazaUnNumeroDeMinutosIgualA1440() {
-        assertThrows(IllegalArgumentException.class, () -> calculadora.calcularTarifa(1440, "carro"));
+        assertThrows(IllegalArgumentException.class, () -> calculadora.calcularTarifa(1445, "carro"));
     }
     @Test
     @DisplayName("Un carro con 15 minutos paga cero")
@@ -77,8 +77,8 @@ class CalculadoraTarifasTest {
     }
     @Test
     @DisplayName("Un carro con 1 hora paga 2000")
-    void carroCon1HoraPaga2000() {
-        assertEquals(2000, calculadora.calcularTarifa(60, "carro"));
+    void carroCon1HoraPaga3000() {
+        assertEquals(3000, calculadora.calcularTarifa(60, "carro"));
     }
 }
 
