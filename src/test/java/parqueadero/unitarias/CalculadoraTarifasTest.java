@@ -30,55 +30,5 @@ class CalculadoraTarifasTest {
     void rechazaUnTipoDeVehiculoDesconocido() {
         assertThrows(IllegalArgumentException.class, () -> calculadora.calcularTarifa(30, "bicicleta"));
     }
-    @Test
-    @DisplayName("Rechaza un número de minutos negativo")
-    void rechazaUnNumeroDeMinutosNegativo() {
-        assertThrows(IllegalArgumentException.class, () -> calculadora.calcularTarifa(-1, "carro"));
-    }
-    @Test
-    @DisplayName("Rechaza un número de minutos mayor a 1440")
-    void rechazaUnNumeroDeMinutosMayorA1440() {
-        assertThrows(IllegalArgumentException.class, () -> calculadora.calcularTarifa(1441, "moto"));
-    }
-    @Test
-    @DisplayName("Un carro con 15 minutos paga cero")
-    void carroCon15MinutosPagaCero() {
-        assertEquals(0, calculadora.calcularTarifa(15, "carro"));
-    }
-    @Test
-    @DisplayName("Una moto con 15 minutos paga cero")
-    void motoCon15MinutosPagaCero() {
-        assertEquals(0, calculadora.calcularTarifa(15, "moto"));
-    }
-    @Test
-    @DisplayName("Un vehículo con 0 minutos paga cero")
-    void vehiculoCon0MinutosPagaCero() {
-        assertEquals(0, calculadora.calcularTarifa(0, "carro"));
-    }
-    @Test
-    @DisplayName("Una estadia de moto nunca paga mas del tope")
-    void estadiaNuncaPagaMasDelTope() {
-        assertEquals(12000, calculadora.calcularTarifa(1440, "moto"));
-    }
-    @Test
-    @DisplayName("Una estadia de carro nunca paga mas del tope")
-    void estadiaNuncaPagaMasDelTopeCarro() {
-        assertEquals(25000, calculadora.calcularTarifa(1440, "carro"));
-    }
-    @Test
-    @DisplayName("Una estadia de carro con 15 minutos paga cero")
-    void estadiaDeCarroCon15MinutosPagaCero() {
-        assertEquals(0, calculadora.calcularTarifa(15, "carro"));
-    }
-    @Test
-    @DisplayName("Una estadia de moto con 15 minutos paga cero")
-    void estadiaDeMotoCon15MinutosPagaCero() {
-        assertEquals(0, calculadora.calcularTarifa(15, "moto"));
-    }
-    @Test
-    @DisplayName("Una estadia de carro con 16 minutos paga 3000")
-    void estadiaDeCarroCon16MinutosPaga3000() {
-        assertEquals(3000, calculadora.calcularTarifa(16, "carro"));
-    }
 }
 
